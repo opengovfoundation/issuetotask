@@ -11,6 +11,14 @@
 |
 */
 
+Route::any('{slug}', function ($slug) {
+  if (!Config::get('app.debug')) {
+      return File::get(public_path() . '/index.html');
+  } else {
+      return File::get(public_path() . '/pre-build.html');
+  }
+})->where('slug', '^(?!api/)(.*)$');
+
 Route::get('/', 'WelcomeController@index');
 
 Route::get('home', 'HomeController@index');
