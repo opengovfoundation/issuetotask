@@ -1,4 +1,10 @@
-var elixir = require('laravel-elixir');
+var gulp = require('gulp'),
+  gutil = require('gulp-util'),
+  elixir = require('laravel-elixir'),
+  usemin = require('gulp-usemin'),
+  uglify = require('gulp-uglify'),
+  rev = require('gulp-rev');
+
 
 /*
  |--------------------------------------------------------------------------
@@ -11,6 +17,16 @@ var elixir = require('laravel-elixir');
  |
  */
 
-elixir(function(mix) {
-    mix.less('app.less');
+elixir(function (mix) {
+  mix.less('app.less');
+});
+
+gulp.task('usemin', function () {
+  gutil.log(gutil.colors.yellow('Building /public/index.html -> /public/build/index.html'));
+
+  return gulp.src('./public/index.html')
+    .pipe(usemin({
+      js: [uglify(), rev()],
+    }))
+    .pipe(gulp.dest('public/build/'));
 });

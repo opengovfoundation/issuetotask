@@ -15,7 +15,7 @@ Route::any('{slug}', function ($slug) {
   if (!Config::get('app.debug')) {
       return File::get(public_path() . '/index.html');
   } else {
-      return File::get(public_path() . '/pre-build.html');
+      return File::get(public_path() . '/build/index.html');
   }
 })->where('slug', '^(?!api/)(.*)$');
 
