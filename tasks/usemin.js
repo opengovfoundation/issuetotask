@@ -1,4 +1,3 @@
-var cachebust = require('gulp-cachebust');
 var gulp = require('gulp');
 var usemin = require('gulp-usemin');
 var uglify = require('gulp-uglify');
