@@ -1,10 +1,7 @@
-var gulp = require('gulp'),
+var elixir = require('laravel-elixir'),
+  gulp = require('gulp'),
   gutil = require('gulp-util'),
-  elixir = require('laravel-elixir'),
-  usemin = require('gulp-usemin'),
-  uglify = require('gulp-uglify'),
-  rev = require('gulp-rev');
-
+  requireDir = require('require-dir');
 
 /*
  |--------------------------------------------------------------------------
@@ -21,12 +18,14 @@ elixir(function (mix) {
   mix.less('app.less');
 });
 
-gulp.task('usemin', function () {
-  gutil.log(gutil.colors.yellow('Building /public/index.html -> /public/build/index.html'));
+requireDir('./tasks');
 
-  return gulp.src('./public/index.html')
-    .pipe(usemin({
-      js: [uglify(), rev()],
-    }))
-    .pipe(gulp.dest('public/build/'));
+//Default Task
+gulp.task('default', ['build'], function () {
+  gutil.log(gutil.colors.yellow('Building production files...'));
+});
+
+//Build Task
+gulp.task('build', ['usemin'], function () {
+  gutil.log(gutil.colors.yellow('Running usemin task...'));
 });
