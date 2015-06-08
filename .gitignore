@@ -8,3 +8,6 @@ public/.sass-cache
 
 # Laravel
 .env
+
+# Storage
+storage/github/

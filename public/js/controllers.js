@@ -1,4 +1,8 @@
 angular.module('app.controllers', [])
   .controller('AppController', function ($scope, $http) {
-    console.log('AppController Loaded');
+    
+    $http.get('/api')
+      .success(function (data) {
+        $scope.repo_name = data.repo_name;
+      });
   });

@@ -17,13 +17,13 @@ Route::any('{slug}', function ($slug) {
   } else {
       return File::get(public_path() . '/index.html');
   }
-})->where('slug', '^(?!api/)(.*)$');
+})->where('slug', '^(?!api)(.*)$');
 
-Route::get('/', 'WelcomeController@index');
+Route::get('api', 'AppController@index');
 
-Route::get('home', 'HomeController@index');
+Route::get('api/github/status', 'GithubController@index');
 
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
+// Route::controllers([
+// 	'auth' => 'Auth\AuthController',
+// 	'password' => 'Auth\PasswordController',
+// ]);
