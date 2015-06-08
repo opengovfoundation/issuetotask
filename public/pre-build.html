@@ -39,12 +39,14 @@
   </section>
   <section>
     <h1>Teamwork Status:</h1>
-    <table class="table table-condensed">
-      <tr ng-repeat="hook in hooks">
-        <th scope="row">Open Issues:</th>
-        <td>{{ project.tasks_count }}</td>
-      </tr>
-    </table>
+    <section class="project">
+      <h1>Name: {{ project.name }}</h1>
+    </section>
+    <section class="tasklists">
+      <div ng-repeat="list in tasklists">
+        <p>Name: {{ list.name }}</p>
+      </div>
+    </section>
   </section>
 </body>
 </html>

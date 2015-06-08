@@ -1,18 +1,23 @@
 angular.module('app.controllers', [])
   .controller('AppController', function ($scope, $http) {
 
+    //Get Basic App Information
     $http.get('/api')
       .success(function (data) {
         $scope.repo_name = data.repo_name;
       });
 
-    $http.get('/api/github/status')
+    //Get GH Status Information
+    $http.get('/api/github')
       .success(function (data) {
         $scope.repo = data.repo;
       });
 
-    $http.get('/api/teamwork/status')
+    //Get Teamwork Status Information
+    $http.get('/api/teamwork')
       .success(function (data) {
-        $scope.tasklist = data.tasklist;
+        $scope.project = data.project;
+        $scope.tasklists = data.tasklists;
       });
+
   });
