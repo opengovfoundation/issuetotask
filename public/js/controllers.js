@@ -11,6 +11,7 @@ angular.module('app.controllers', [])
     $http.get('/api/github')
       .success(function (data) {
         $scope.repo = data.repo;
+        $scope.milestones = data.milestones;
       });
 
     //Get Teamwork Status Information

@@ -36,8 +36,9 @@ class GithubController extends Controller {
 	{
 
 		$repo = GitHub::repo()->show($this->org, $this->repo);
+		$milestones = GitHub::issues()->milestones()->all($this->org, $this->repo);
 
-		return ['repo' => $repo];
+		return ['repo' => $repo, 'milestones' => $milestones];
 	}
 
 }

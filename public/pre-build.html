@@ -21,32 +21,45 @@
 
   <script src="/js/app.js"></script>
   <script src="/js/controllers.js"></script>
+  <script src="/js/directives.js"></script>
   <!-- endbuild -->
 </head>
 <body>
-  <section>
+  <section class="github">
     <h1>GitHub Status:</h1>
-    <table class="table table-condensed">
-      <tr>
-        <th scope="row">GitHub Repo:</th>
-        <td>{{ repo_name }}</td>
-      </tr>
-      <tr>
-        <th scope="row">Open Issues:</th>
-        <td>{{ repo.open_issues_count }}</td>
-      </tr>
-    </table>
+    <div class="repo">
+      <ul>
+        <li>Name: {{ repo_name }}</li>
+        <li>Open Issues: {{ repo.open_issues_count }}</li>
+        <li>
+          Milestones: 
+          <ul class="milestones">
+            <li ng-repeat="milestone in milestones">
+              <ul class="milestone_attributes">
+                <li>Title: '{{ milestone.title }}'</li>
+                <li>Description '{{ milestone.description }}'</li>
+                <li>Issues: 
+                  <div class="progress">
+                    <div milestone-progress open-issues="{{ milestone.open_issues }}" closed-issues="{{ milestone.closed_issues }}"></div>
+                  </div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
   </section>
-  <section>
+  <section class="teamwork">
     <h1>Teamwork Status:</h1>
-    <section class="project">
+    <div class="project">
       <h2>Name: {{ project.name }}</h2>
-    </section>
-    <section class="tasklists">
+    </div>
+    <div class="tasklists">
       <div ng-repeat="list in tasklists">
         <p>Tasklist: {{ list.name }}</p>
       </div>
-    </section>
+    </div>
   </section>
 </body>
 </html>
