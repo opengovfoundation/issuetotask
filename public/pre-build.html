@@ -25,41 +25,43 @@
   <!-- endbuild -->
 </head>
 <body>
-  <section class="github">
-    <h1>GitHub Status:</h1>
-    <div class="repo">
-      <ul>
-        <li>Name: {{ repo_name }}</li>
-        <li>Open Issues: {{ repo.open_issues_count }}</li>
-        <li>
-          Milestones: 
-          <ul class="milestones">
-            <li ng-repeat="milestone in milestones">
-              <ul class="milestone_attributes">
-                <li>Title: '{{ milestone.title }}'</li>
-                <li>Description '{{ milestone.description }}'</li>
-                <li>Issues: 
-                  <div class="progress">
-                    <div milestone-progress open-issues="{{ milestone.open_issues }}" closed-issues="{{ milestone.closed_issues }}"></div>
-                  </div>
-                </li>
-              </ul>
-            </li>
+  <div class="wrap row">
+    <section class="github col-md-6">
+      <h1>GitHub Status:</h1>
+      <div class="repo">
+        <ul>
+          <li>Name: {{ repo_name }}</li>
+          <li>Open Issues: {{ repo.open_issues_count }}</li>
+          <li>
+            Milestones: 
+            <ul class="milestones">
+              <li ng-repeat="milestone in milestones">
+                <ul class="milestone_attributes">
+                  <li>Title: '{{ milestone.title }}'</li>
+                  <li>Description '{{ milestone.description }}'</li>
+                  <li>Issues: 
+                    <div class="progress">
+                      <div milestone-progress open-issues="{{ milestone.open_issues }}" closed-issues="{{ milestone.closed_issues }}"></div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="teamwork col-md-6">
+      <h1>Teamwork Status:</h1>
+      <ul class="project">
+        <li>Name: {{ project.name }}</li>
+        <li>Tasklists:
+          <ul class="tasklists">
+            <li ng-repeat="list in tasklists">Tasklist: {{ list.name }}</li>
           </ul>
         </li>
       </ul>
-    </div>
-  </section>
-  <section class="teamwork">
-    <h1>Teamwork Status:</h1>
-    <div class="project">
-      <h2>Name: {{ project.name }}</h2>
-    </div>
-    <div class="tasklists">
-      <div ng-repeat="list in tasklists">
-        <p>Tasklist: {{ list.name }}</p>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </body>
 </html>
