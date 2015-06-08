@@ -21,11 +21,11 @@ elixir(function (mix) {
 requireDir('./tasks');
 
 //Default Task
-gulp.task('default', ['build'], function () {
+gulp.task('default', ['build', 'cleanup'], function () {
   gutil.log(gutil.colors.yellow('Building production files...'));
 });
 
 //Build Task
-gulp.task('build', ['buildJS'], function () {
-  gutil.log(gutil.colors.yellow('Running buildJS task...'));
+gulp.task('build', ['rename', 'usemin', 'cachebust'], function () {
+  gutil.log(gutil.colors.yellow('Running build task...'));
 });
