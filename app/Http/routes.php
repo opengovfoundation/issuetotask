@@ -12,7 +12,7 @@
 */
 
 Route::any('{slug}', function ($slug) {
-  if (!Config::get('app.debug')) {
+  if ($_ENV['APP_DEBUG']) {
       return File::get(public_path() . '/pre-build.html');
   } else {
       return File::get(public_path() . '/index.html');

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:ng="http://angularjs.org" ng-app="app" ng-controller="AppController" lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,9 +18,20 @@
   <script src="/bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
   <script src="/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
   <script src="/bower_components/ui-router/release/angular-ui-router.min.js"></script>
+
+  <script src="/js/app.js"></script>
+  <script src="/js/controllers.js"></script>
   <!-- endbuild -->
 </head>
 <body>
-  <h1>Index</h1>
+  <section>
+    <h1>Status</h1>
+    <table class="table table-condensed">
+      <tr>
+        <th scope="row">Repo:</th>
+        <td>{{ repo_name }}</td>
+      </tr>
+    </table>
+  </section>
 </body>
 </html>
