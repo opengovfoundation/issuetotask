@@ -3,5 +3,8 @@
 /node_modules
 public/bower_components
 
+# Compass
+public/.sass-cache
+
 # Laravel
 .env
