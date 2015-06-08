@@ -149,6 +149,7 @@ return [
 		 *	Third Party Service Providers...
 		 */
 		'GrahamCampbell\GitHub\GitHubServiceProvider',
+		'Rossedman\Teamwork\TeamworkServiceProvider',
 	],
 
 	/*
@@ -194,6 +195,7 @@ return [
 		'Schema'    => 'Illuminate\Support\Facades\Schema',
 		'Session'   => 'Illuminate\Support\Facades\Session',
 		'Storage'   => 'Illuminate\Support\Facades\Storage',
+		'Teamwork' 	=> 'Rossedman\Teamwork\Facades\Teamwork',
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',

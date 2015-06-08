@@ -33,5 +33,9 @@ return [
 		'model'  => 'App\User',
 		'secret' => '',
 	],
+	'teamwork' => [
+		'key'	=> $_ENV['TW_TOKEN'],
+		'url'	=> $_ENV['TW_URL']
+	],
 
 ];
