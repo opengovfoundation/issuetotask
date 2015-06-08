@@ -21,7 +21,7 @@ elixir(function (mix) {
 requireDir('./tasks');
 
 //Default Task
-gulp.task('default', ['build', 'cleanup'], function () {
+gulp.task('default', ['build'], function () {
   gutil.log(gutil.colors.yellow('Building production files...'));
 });
 
