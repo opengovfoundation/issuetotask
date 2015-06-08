@@ -22,7 +22,9 @@ class GithubController extends Controller {
 	 */
 	public function __construct()
 	{
-		//$this->github = $github;
+		$info = explode('/', $_ENV['GH_REPO']);
+		$this->org = $info[0];
+		$this->repo = $info[1];
 	}
 
 	/**
@@ -33,10 +35,9 @@ class GithubController extends Controller {
 	public function index()
 	{
 
-		$issues = GitHub::repo()->hooks();
-		return ['hooks' => $issues];
+		$repo = GitHub::repo()->show($this->org, $this->repo);
 
-		return ['issues' => $issues];
+		return ['repo' => $repo];
 	}
 
 }

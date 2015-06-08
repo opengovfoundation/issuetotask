@@ -25,11 +25,24 @@
 </head>
 <body>
   <section>
-    <h1>Status</h1>
+    <h1>GitHub Status:</h1>
     <table class="table table-condensed">
       <tr>
-        <th scope="row">Repo:</th>
+        <th scope="row">GitHub Repo:</th>
         <td>{{ repo_name }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Open Issues:</th>
+        <td>{{ repo.open_issues_count }}</td>
+      </tr>
+    </table>
+  </section>
+  <section>
+    <h1>Teamwork Status:</h1>
+    <table class="table table-condensed">
+      <tr ng-repeat="hook in hooks">
+        <th scope="row">Open Issues:</th>
+        <td>{{ project.tasks_count }}</td>
       </tr>
     </table>
   </section>
