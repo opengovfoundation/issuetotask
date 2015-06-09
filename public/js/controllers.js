@@ -1,5 +1,5 @@
 angular.module('app.controllers', [])
-  .controller('AppController', function ($scope, $http) {
+  .controller('AppController', function ($scope, $http, $filter) {
 
     //Get Basic App Information
     $http.get('/api')
@@ -8,17 +8,29 @@ angular.module('app.controllers', [])
       });
 
     //Get GH Status Information
-    $http.get('/api/github')
+    var github = $http.get('/api/github')
       .success(function (data) {
         $scope.repo = data.repo;
         $scope.milestones = data.milestones;
       });
 
     //Get Teamwork Status Information
-    $http.get('/api/teamwork')
+    var teamwork = $http.get('/api/teamwork')
       .success(function (data) {
         $scope.project = data.project;
         $scope.tasklists = data.tasklists;
       });
+
+    //Wait until both GH and TW are loaded
+    github.then(function () {
+      teamwork.then(function () {
+        $scope.milestone_syncs = [];
+
+        angular.forEach($scope.milestones, function (milestone) {
+          var found = $filter('milestoneMatch')(milestone, $scope.tasklists);
+          $scope.milestone_syncs.push({title: milestone.title, found: found});
+        });
+      });
+    });
 
   });
