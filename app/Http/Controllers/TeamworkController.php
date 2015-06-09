@@ -35,8 +35,9 @@ class TeamworkController extends Controller {
 
 		$project = Teamwork::project($this->projectId)->find();
 		$tasklists = Teamwork::project($this->projectId)->tasklists();
+		$milestones = Teamwork::project($this->projectId)->milestones();
 
-		return ['project' => $project['project'], 'tasklists' => $tasklists['tasklists']];
+		return ['project' => $project['project'], 'tasklists' => $tasklists['tasklists'], 'milestones' => $milestones['milestones']];
 	}
 
 }

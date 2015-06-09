@@ -19,6 +19,7 @@ angular.module('app.controllers', [])
       .success(function (data) {
         $scope.project = data.project;
         $scope.tasklists = data.tasklists;
+        $scope.tw_milestones = data.milestones;
       });
 
     var hooks = $http.get('/api/github/hooks')
