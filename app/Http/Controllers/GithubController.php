@@ -42,9 +42,25 @@ class GithubController extends Controller {
 	}
 
 	public function getHooks() {
-		$hooks = Github::repo()->hooks()->all();
+		$base_url = url();
 
-		return ['hooks' => $hooks];
+		$hooks = Github::repo()->hooks()->all($this->org, $this->repo);
+
+		$relevant_hooks = [];
+
+		//Iterate through each hook
+		foreach($hooks as $hook) {
+			//If the hook url is set
+			if(isset($hook['config']['url'])){
+				//Check that it matches this base url and append to $relevant_hooks
+				if(strpos($hook['config']['url'], $base_url) !== FALSE){
+					array_push($relevant_hooks, $hook);
+				}
+			}
+		}
+
+		//Return all relevant hooks
+		return ['hooks' => $relevant_hooks];
 	}
 
 }
