@@ -2,11 +2,11 @@
  *  Custom Styles
  */
 /* line 5, ../sass/style.scss */
-.success {
+.glyphicon-ok {
   color: green;
 }
 
 /* line 9, ../sass/style.scss */
-.error {
+.glyphicon-remove {
   color: red;
 }
