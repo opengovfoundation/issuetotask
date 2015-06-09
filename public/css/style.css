@@ -1,3 +1,12 @@
 /*
  *  Custom Styles
  */
+/* line 5, ../sass/style.scss */
+.success {
+  color: green;
+}
+
+/* line 9, ../sass/style.scss */
+.error {
+  color: red;
+}

@@ -32,7 +32,9 @@
       <div class="milestone-sync-wrapper">
         <ul class='milestone-syncs'>
           <li ng-repeat="sync in milestone_syncs">
-            <i class="glyphicon" ng-class="{'glyphicon-ok': sync.found, 'glyphicon-remove': !sync.found}"></i> {{ sync.title }} 
+            <i class="glyphicon glyphicon-ok success" ng-if="sync.found"></i>
+            <i class="glyphicon glyphicon-remove error" ng-if="!sync.found"></i>
+            {{ sync.title }} 
           </li>
         </ul>
       </div>
