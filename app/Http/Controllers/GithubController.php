@@ -41,4 +41,10 @@ class GithubController extends Controller {
 		return ['repo' => $repo, 'milestones' => $milestones];
 	}
 
+	public function getHooks() {
+		$hooks = Github::repo()->hooks()->all();
+
+		return ['hooks' => $hooks];
+	}
+
 }

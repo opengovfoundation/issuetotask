@@ -2,11 +2,16 @@
  *  Custom Styles
  */
 /* line 5, ../sass/style.scss */
+.wrap {
+  margin: 0 auto;
+}
+
+/* line 9, ../sass/style.scss */
 .glyphicon-ok {
   color: green;
 }
 
-/* line 9, ../sass/style.scss */
+/* line 13, ../sass/style.scss */
 .glyphicon-remove {
   color: red;
 }

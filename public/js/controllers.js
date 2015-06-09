@@ -21,6 +21,11 @@ angular.module('app.controllers', [])
         $scope.tasklists = data.tasklists;
       });
 
+    var hooks = $http.get('/api/github/hooks')
+      .success(function (data) {
+        $scope.hooks = data.hooks;
+      });
+
     //Wait until both GH and TW are loaded
     github.then(function () {
       teamwork.then(function () {
