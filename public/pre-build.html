@@ -39,6 +39,8 @@
           </li>
         </ul>
         <ul class="hooks">
+          <i class="glyphicon glyphicon-remove" ng-if="hooks.length == 0"></i>
+          <i class="glyphicon glyphicon-alert" ng-if="hooks.length > 0"></i>
           Hooks:
           <li ng-repeat="hook in hooks">
             {{ hook }}
