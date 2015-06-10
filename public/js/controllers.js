@@ -1,5 +1,5 @@
 angular.module('app.controllers', [])
-  .controller('AppController', function ($scope, $http, $filter, GithubService, TeamworkService, SessionService) {
+  .controller('AppController', function ($scope, $http, $filter, GithubService, TeamworkService, SessionService, SyncService) {
 
     //Get Basic App Information
     $http.get('/api')
@@ -14,7 +14,7 @@ angular.module('app.controllers', [])
     var teamwork = TeamworkService.getStatus();
 
     $scope.syncMilestone = function (sync) {
-      console.log(sync);
+      SyncService.syncGithubMilestone(sync.id);
     };
 
     //Wait until both GH and TW are loaded
@@ -29,7 +29,7 @@ angular.module('app.controllers', [])
 
         angular.forEach($scope.github.milestones, function (milestone) {
           var found = $filter('milestoneMatch')(milestone, $scope.teamwork.dmilestones);
-          $scope.milestone_syncs.push({title: milestone.title, found: found});
+          $scope.milestone_syncs.push({title: milestone.title, found: found, id: milestone.id});
         });
       });
     });
