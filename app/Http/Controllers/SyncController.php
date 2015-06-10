@@ -45,7 +45,7 @@ class SyncController extends Controller {
       return (new Response(['message', $e->getMessage()], 500));
     }
 
-    return ['milestone' => $TW_milestone];
+    return ['milestone' => $TW_milestone, 'message' => 'Teamwork milestone already exists'];
   }
 
   public function getGithubMilestone() {
