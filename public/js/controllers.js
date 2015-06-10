@@ -1,5 +1,5 @@
 angular.module('app.controllers', [])
-  .controller('AppController', function ($scope, $http, $filter) {
+  .controller('AppController', function ($scope, $http, $filter, GithubService, TeamworkService, SessionService) {
 
     //Get Basic App Information
     $http.get('/api')
@@ -8,33 +8,27 @@ angular.module('app.controllers', [])
       });
 
     //Get GH Status Information
-    var github = $http.get('/api/github')
-      .success(function (data) {
-        $scope.repo = data.repo;
-        $scope.milestones = data.milestones;
-      });
+    var github = GithubService.getStatus();
 
     //Get Teamwork Status Information
-    var teamwork = $http.get('/api/teamwork')
-      .success(function (data) {
-        $scope.project = data.project;
-        $scope.tasklists = data.tasklists;
-        $scope.tw_milestones = data.milestones;
-        console.log($scope.tw_milestones);
-      });
+    var teamwork = TeamworkService.getStatus();
 
-    var hooks = $http.get('/api/github/hooks')
-      .success(function (data) {
-        $scope.hooks = data.hooks;
-      });
+    $scope.syncMilestone = function (sync) {
+      console.log(sync);
+    };
 
     //Wait until both GH and TW are loaded
     github.then(function () {
       teamwork.then(function () {
+
+        //Load the GH and TW objects
+        $scope.github = SessionService.getGithub();
+        $scope.teamwork = SessionService.getTeamwork();
+
         $scope.milestone_syncs = [];
 
-        angular.forEach($scope.milestones, function (milestone) {
-          var found = $filter('milestoneMatch')(milestone, $scope.tw_milestones);
+        angular.forEach($scope.github.milestones, function (milestone) {
+          var found = $filter('milestoneMatch')(milestone, $scope.teamwork.dmilestones);
           $scope.milestone_syncs.push({title: milestone.title, found: found});
         });
       });

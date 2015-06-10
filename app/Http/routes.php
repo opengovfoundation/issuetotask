@@ -22,7 +22,6 @@ Route::any('{slug}', function ($slug) {
 Route::get('api', 'AppController@index');
 
 Route::get('api/github', 'GithubController@index');
-Route::get('api/github/hooks', 'GithubController@getHooks');
 
 Route::get('api/teamwork', 'TeamworkController@index');
 

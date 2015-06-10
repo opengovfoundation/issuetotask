@@ -23,6 +23,7 @@
   <script src="/js/controllers.js"></script>
   <script src="/js/directives.js"></script>
   <script src="/js/filters.js"></script>
+  <script src="/js/services.js"></script>
   <!-- endbuild -->
 </head>
 <body>
@@ -35,7 +36,7 @@
           <li ng-repeat="sync in milestone_syncs">
             <i class="glyphicon glyphicon-ok" ng-if="sync.found"></i>
             <i class="glyphicon glyphicon-remove" ng-if="!sync.found"></i>
-            <a ng-if="!sync.found" class="sync-link">Sync</a>
+            <a ng-if="!sync.found" class="sync-link" ng-click="syncMilestone(sync)">Sync</a>
             {{ sync.title }} 
           </li>
         </ul>

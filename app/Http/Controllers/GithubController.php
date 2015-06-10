@@ -34,16 +34,10 @@ class GithubController extends Controller {
 	 */
 	public function index()
 	{
+		$base_url = url();
 
 		$repo = GitHub::repo()->show($this->org, $this->repo);
 		$milestones = GitHub::issues()->milestones()->all($this->org, $this->repo);
-
-		return ['repo' => $repo, 'milestones' => $milestones];
-	}
-
-	public function getHooks() {
-		$base_url = url();
-
 		$hooks = Github::repo()->hooks()->all($this->org, $this->repo);
 
 		$relevant_hooks = [];
@@ -59,8 +53,7 @@ class GithubController extends Controller {
 			}
 		}
 
-		//Return all relevant hooks
-		return ['hooks' => $relevant_hooks];
+		return ['repo' => $repo, 'milestones' => $milestones, 'hooks' => $relevant_hooks];
 	}
 
 }
