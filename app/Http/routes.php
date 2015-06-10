@@ -27,6 +27,8 @@ Route::get('api/teamwork', 'TeamworkController@index');
 
 Route::post('api/sync/milestone', 'SyncController@postSyncGithubMilestone');
 
+Route::get('api/debug', 'SyncController@getGithubMilestone');
+
 // Route::controllers([
 // 	'auth' => 'Auth\AuthController',
 // 	'password' => 'Auth\PasswordController',
