@@ -15,3 +15,9 @@
 .glyphicon-remove {
   color: red;
 }
+
+/* line 17, ../sass/style.scss */
+.sync-link {
+  text-decoration: underline;
+  cursor: pointer;
+}

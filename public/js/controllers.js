@@ -20,6 +20,7 @@ angular.module('app.controllers', [])
         $scope.project = data.project;
         $scope.tasklists = data.tasklists;
         $scope.tw_milestones = data.milestones;
+        console.log($scope.tw_milestones);
       });
 
     var hooks = $http.get('/api/github/hooks')
@@ -33,7 +34,7 @@ angular.module('app.controllers', [])
         $scope.milestone_syncs = [];
 
         angular.forEach($scope.milestones, function (milestone) {
-          var found = $filter('milestoneMatch')(milestone, $scope.tasklists);
+          var found = $filter('milestoneMatch')(milestone, $scope.tw_milestones);
           $scope.milestone_syncs.push({title: milestone.title, found: found});
         });
       });
