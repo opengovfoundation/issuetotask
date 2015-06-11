@@ -3,6 +3,7 @@ angular.module('app.controllers', [])
 
     $scope.$on('GithubMilestoneSyncUpdated', function () {
       GithubService.getStatus();
+      TeamworkService.getStatus();
     });
 
     //Get Basic App Information
