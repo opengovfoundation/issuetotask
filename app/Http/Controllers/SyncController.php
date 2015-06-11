@@ -57,6 +57,10 @@ class SyncController extends Controller {
       //Milestone not found
       return (new Response(['message' => "Error: " . $e->getMessage()], 500));
     }
+
+    $date = date('Ymd', strtotime($milestone['due_on']));
+
+    return $date;
       
     return $milestone;
   }
@@ -65,7 +69,7 @@ class SyncController extends Controller {
     return Teamwork::project($this->projectId)->createMilestone([
         'title'                 => $GH_milestone['title'],
         'description'           => $GH_milestone['description'],
-        'deadline'              => '20150402',
+        'deadline'              => date('Ymd', strtotime($GH_milestone['due_on'])),
         'notify'                => false,
         'reminder'              => false,
         'responsible-party-ids' => $this->personId
@@ -83,4 +87,15 @@ class SyncController extends Controller {
 
     return false;
   }
+
+  // public function createTWTasklist($GH_milestone, $TW_milestone) {
+  //   $tasklist = Teamwork::project($this->projectId)->createTasklist({
+  //     'name'          => '',
+  //     'private'       => '',
+  //     'pinned'        => '',
+  //     'milestone-id'  => '',
+  //     'description'   => '',
+  //     ''
+  //   });
+  // }
 }
