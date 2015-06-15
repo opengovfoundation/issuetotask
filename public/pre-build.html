@@ -8,6 +8,7 @@
   <!-- build:css /build/app.css -->
   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
+  <link rel="stylesheet" href="/css/nice-admin/font-awesome.min.css">
   <link rel="stylesheet" href="/css/nice-admin/widgets.css" />
   <link rel="stylesheet" href="/css/nice-admin/style-responsive.css" />
   <link rel="stylesheet" href="/css/nice-admin/style.css" />
@@ -23,9 +24,12 @@
   <script src="/bower_components/ui-router/release/angular-ui-router.min.js"></script>
 
   <script src="/js/app.js"></script>
-  <script src="/js/controllers.js"></script>
+  <script src="/js/controllers/controllers.js"></script>
+  <script src="/js/controllers/AppController.js"></script>
+  <script src="/js/controllers/GithubSyncController.js"></script>
   <script src="/js/directives.js"></script>
   <script src="/js/filters.js"></script>
+  <script src="/js/routes.js"></script>
   <script src="/js/services/services.js"></script>
   <script src="/js/services/GithubService.js"></script>
   <script src="/js/services/SessionService.js"></script>
@@ -37,6 +41,9 @@
   <section id="container">
     <header class="header dark-bg" ng-include="'/templates/partials/header.html'"></header>
     <aside ng-include="'/templates/partials/sidebar.html'"></aside>
+    <section id="main-content">
+      <section class="wrapper" ui-view></section>
+    </section>
   </section>
 
   <!--

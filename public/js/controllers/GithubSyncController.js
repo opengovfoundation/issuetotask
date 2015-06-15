@@ -1,6 +1,5 @@
-angular.module('app.controllers', [])
-  .controller('AppController', function ($scope, $http, $filter, GithubService, TeamworkService, SessionService, SyncService) {
-
+angular.module('app.controllers')
+  .controller('GithubSyncController', function ($scope, $http, $filter, GithubService, TeamworkService, SessionService, SyncService) {
     $scope.$on('GithubMilestoneSyncUpdated', function () {
       GithubService.getStatus();
       TeamworkService.getStatus();
@@ -30,6 +29,8 @@ angular.module('app.controllers', [])
         $scope.github = SessionService.getGithub();
         $scope.teamwork = SessionService.getTeamwork();
 
+        $scope.webhook_installed = $scope.github.hooks.length > 0 ? true : false;
+
         $scope.milestone_syncs = [];
 
         angular.forEach($scope.github.milestones, function (milestone) {
@@ -38,5 +39,4 @@ angular.module('app.controllers', [])
         });
       });
     });
-
   });

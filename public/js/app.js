@@ -2,7 +2,15 @@ var imports = [
   'app.controllers',
   'app.directives',
   'app.filters',
-  'app.services'
+  'app.services',
+  'ui.router'
 ];
 
-angular.module('app', imports);
+var app = angular.module('app', imports);
+
+app.config(function ($locationProvider) {
+  $locationProvider.html5Mode({
+    enabled: true,
+    requireBase: false
+  });
+});
