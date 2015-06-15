@@ -1,15 +1,83 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:ng="http://angularjs.org" ng-app="app" ng-controller="AppController" lang="en">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Title</title>
-  
-  <link rel="stylesheet" href="/build/app.css?t=1433786507932"/>
+  <title>Dashboard</title>
 
-  <script src="/build/app.js?t=1433786507932"></script>
+  <link rel="stylesheet" href="/build/app.css?t=1434397231728"/>
+
+  <script src="/build/app.js?t=1434397231728"></script>
 </head>
 <body>
-  <h1>Index</h1>
+  <section id="container">
+    <header class="header dark-bg" ng-include="'/templates/partials/header.html'"></header>
+    <aside ng-include="'/templates/partials/sidebar.html'"></aside>
+    <section id="main-content">
+      <section class="wrapper" ui-view></section>
+    </section>
+  </section>
+
+  <!--
+  <div class="wrap container row">
+    <section class="sync col-md-12">
+      <h1>Sync Status:</h1>
+      <div class="sync-wrapper row">
+        <ul class='milestone-syncs col-md-6'>
+          Milestones:
+          <li ng-repeat="sync in milestone_syncs">
+            <i class="glyphicon glyphicon-ok" ng-if="sync.found"></i>
+            <i class="glyphicon glyphicon-remove" ng-if="!sync.found"></i>
+            <a ng-if="!sync.found" class="sync-link" ng-click="syncMilestone(sync)">Sync</a>
+            {{ sync.title }} 
+          </li>
+        </ul>
+        <ul class="hooks">
+          <i class="glyphicon glyphicon-remove" ng-if="hooks.length == 0"></i>
+          <i class="glyphicon glyphicon-alert" ng-if="hooks.length > 0"></i>
+          Hooks:
+          <li ng-repeat="hook in hooks">
+            {{ hook }}
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="github col-md-6">
+      <h1>GitHub Status:</h1>
+      <div class="repo">
+        <ul>
+          <li>Name: {{ repo_name }}</li>
+          <li>Open Issues: {{ repo.open_issues_count }}</li>
+          <li>
+            Milestones: 
+            <ul class="milestones">
+              <li ng-repeat="milestone in milestones">
+                <ul class="milestone_attributes">
+                  <li>Title: '{{ milestone.title }}'</li>
+                  <li>Description '{{ milestone.description }}'</li>
+                  <li>Issues: 
+                    <div class="progress">
+                      <div milestone-progress open-issues="{{ milestone.open_issues }}" closed-issues="{{ milestone.closed_issues }}"></div>
+                    </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="teamwork col-md-6">
+      <h1>Teamwork Status:</h1>
+      <ul class="project">
+        <li>Name: {{ project.name }}</li>
+        <li>Tasklists:
+          <ul class="tasklists">
+            <li ng-repeat="list in tasklists">Tasklist: {{ list.name }}</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </div> -->
 </body>
 </html>
