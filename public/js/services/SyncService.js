@@ -5,7 +5,8 @@ angular.module('app.services')
     SyncService.syncGithubMilestone = function (number) {
       return $http.post('/api/sync/milestones', {number: number})
         .success(function (milestone) {
-          $rootScope.$broadcast('GithubMilestoneSyncUpdated', milestone);
+          console.log(milestone);
+          this.getMilestoneStatuses();
         })
         .error(function (data) {
           console.error(data);

@@ -34,7 +34,6 @@ class SyncController extends Controller {
       Log::info($TW_milestone);
 
       if(!$TW_milestone) {
-
         return $this->createTWMilestone($GH_milestone);
       }
     } catch (\RuntimeException $e) {

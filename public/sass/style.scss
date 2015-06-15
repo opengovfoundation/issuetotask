@@ -14,7 +14,13 @@
   color:red;
 }
 
-.milestone-sync-btn {
+.github-sync-table {
+  th, td {
+    text-align:center;
+  }
+}
+
+.sync-btn {
   cursor: pointer;
   margin-left:20px;
 
