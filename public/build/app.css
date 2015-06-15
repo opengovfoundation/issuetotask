@@ -5697,7 +5697,7 @@ span.customSelect.changed {
 }
 
 /* line 17, ../sass/style.scss */
-.sync-link {
-  text-decoration: underline;
+.milestone-sync-btn {
   cursor: pointer;
+  margin-left: 20px;
 }

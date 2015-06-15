@@ -33,7 +33,7 @@
       </thead>
       <tbody>
         <tr ng-repeat="sync in milestone_syncs">
-          <td ng-class="sync.synced ? 'success' : 'danger'">{{ sync.title }}</td>
+          <td ng-class="sync.synced ? 'success' : 'danger'">{{ sync.title }}<i class="fa fa-refresh milestone-sync-btn" ng-if="!sync.synced"></i></td>
           <td ng-class="sync.milestone_synced ? 'success' : 'danger'">{{ sync.tw_milestone }}</td>
           <td ng-class="sync.tasklist_synced ? 'success' : 'danger'">{{ sync.tasklist }}</td>
           <td ng-class="sync.tasks_synced ? 'success' : 'danger'">{{ sync.tasks }}</td>
