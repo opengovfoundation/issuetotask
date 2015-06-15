@@ -66,7 +66,7 @@ class SyncController extends Controller {
           }
         }
 
-        array_push($syncs, ['title' => $title, 'milestone_exists' => $found], 'synced' => $found);
+        array_push($syncs, ['title' => $title, 'milestone_exists' => $found, 'synced' => $found]);
       }
 
       //$milestone = Github::issues()->milestones()->show($this->org, $this->repo, $id);
