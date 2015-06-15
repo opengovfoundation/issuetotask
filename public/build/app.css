@@ -5696,8 +5696,17 @@ span.customSelect.changed {
   color: red;
 }
 
-/* line 17, ../sass/style.scss */
-.milestone-sync-btn {
+/* line 18, ../sass/style.scss */
+.github-sync-table th, .github-sync-table td {
+  text-align: center;
+}
+
+/* line 23, ../sass/style.scss */
+.sync-btn {
   cursor: pointer;
   margin-left: 20px;
+}
+/* line 27, ../sass/style.scss */
+.sync-btn:hover {
+  font-weight: bold;
 }
