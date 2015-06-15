@@ -48,21 +48,36 @@ class SyncController extends Controller {
     return ['milestone' => $TW_milestone, 'message' => 'Teamwork milestone already exists'];
   }
 
-  public function getGithubMilestone() {
-    $id = 7;
+  public function getGithubMilestoneStatus() {
+    $syncs = [];
 
     try{
-      $milestone = Github::issues()->milestones()->show($this->org, $this->repo, $id);
+      $GH_milestones = GitHub::issues()->milestones()->all($this->org, $this->repo);
+      $TW_milestones = Teamwork::project($this->projectId)->milestones();
+
+      foreach($GH_milestones as $GH_milestone) {
+        $found = false;
+        $title = $GH_milestone['title'];
+
+        //Check milestone existence by title
+        foreach($TW_milestones['milestones'] as $TW_milestone) {
+          if($TW_milestone['title'] === $title){
+            $found = true;
+          }
+        }
+
+        array_push($syncs, ['title' => $title, 'milestone_exists' => $found], 'synced' => $found);
+      }
+
+      //$milestone = Github::issues()->milestones()->show($this->org, $this->repo, $id);
     } catch (\RuntimeException $e) {
       //Milestone not found
       return (new Response(['message' => "Error: " . $e->getMessage()], 500));
     }
 
-    $date = date('Ymd', strtotime($milestone['due_on']));
+    //$date = date('Ymd', strtotime($milestone['due_on']));
 
-    return $date;
-      
-    return $milestone;
+    return ['syncs' => $syncs];
   }
 
   public function createTWMilestone($GH_milestone) {

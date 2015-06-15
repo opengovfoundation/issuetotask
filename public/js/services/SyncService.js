@@ -12,5 +12,13 @@ angular.module('app.services')
         });
     };
 
+    SyncService.getMilestoneStatuses = function () {
+      return $http.get('/api/sync/milestones')
+        .success(function (data) {
+          console.log(data);
+          $rootScope.$broadcast('GetGithubMilestoneSync', data);
+        });
+    };
+
     return SyncService;
   });

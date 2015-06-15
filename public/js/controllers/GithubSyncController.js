@@ -5,6 +5,10 @@ angular.module('app.controllers')
       TeamworkService.getStatus();
     });
 
+    $scope.$on('GetGithubMilestoneSync', function (event, args) {
+      $scope.syncs = args.syncs;
+    });
+
     //Get Basic App Information
     $http.get('/api')
       .success(function (data) {
@@ -17,6 +21,8 @@ angular.module('app.controllers')
     //Get Teamwork Status Information
     var teamwork = TeamworkService.getStatus();
 
+    SyncService.getMilestoneStatuses();
+
     $scope.syncMilestone = function (sync) {
       SyncService.syncGithubMilestone(sync.number);
     };
@@ -24,7 +30,6 @@ angular.module('app.controllers')
     //Wait until both GH and TW are loaded
     github.then(function () {
       teamwork.then(function () {
-
         //Load the GH and TW objects
         $scope.github = SessionService.getGithub();
         $scope.teamwork = SessionService.getTeamwork();
