@@ -4,10 +4,13 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Dashboard</title>
-  
+
   <!-- build:css /build/app.css -->
-  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap-theme.min.css" />
+  <link rel="stylesheet" href="/css/nice-admin/widgets.css" />
+  <link rel="stylesheet" href="/css/nice-admin/style-responsive.css" />
+  <link rel="stylesheet" href="/css/nice-admin/style.css" />
   <link rel="stylesheet" href="/css/style.css"/>
   <!-- endbuild -->
 
@@ -31,6 +34,12 @@
   <!-- endbuild -->
 </head>
 <body>
+  <section id="container">
+    <header class="header dark-bg" ng-include="'/templates/partials/header.html'"></header>
+    <aside ng-include="'/templates/partials/sidebar.html'"></aside>
+  </section>
+
+  <!--
   <div class="wrap container row">
     <section class="sync col-md-12">
       <h1>Sync Status:</h1>
@@ -90,6 +99,6 @@
         </li>
       </ul>
     </section>
-  </div>
+  </div> -->
 </body>
 </html>
