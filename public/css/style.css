@@ -21,3 +21,7 @@
   cursor: pointer;
   margin-left: 20px;
 }
+/* line 21, ../sass/style.scss */
+.milestone-sync-btn:hover {
+  font-weight: bold;
+}

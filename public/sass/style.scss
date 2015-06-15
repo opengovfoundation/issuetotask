@@ -17,4 +17,8 @@
 .milestone-sync-btn {
   cursor: pointer;
   margin-left:20px;
+
+  &:hover {
+    font-weight:bold;
+  }
 }
