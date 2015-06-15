@@ -11,3 +11,6 @@ public/.sass-cache
 
 # Storage
 storage/github/
+
+# Apache
+.htpasswd
