@@ -5,7 +5,7 @@ var uglify = require('gulp-uglify');
 gulp.task('usemin', ['rename'], function () {
   return gulp.src('./public/index.html')
     .pipe(usemin({
-      js: [uglify()],
+      js: [uglify({mangle: false})],
     }))
     .pipe(gulp.dest('public'));
 });
