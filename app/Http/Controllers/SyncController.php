@@ -64,7 +64,21 @@ class SyncController extends Controller {
 
     try{
       $GH_milestones = GitHub::issues()->milestones()->all($this->org, $this->repo);
+      $GH_hooks = Github::repo()->hooks()->all($this->org, $this->repo);
       $TW_milestones = Teamwork::project($this->projectId)->milestones();
+
+      $base_url = url();
+      $relevant_hooks = [];
+
+      foreach($GH_hooks as $hook) {
+        //If the hook url is set
+        if(isset($hook['config']['url'])){
+          //Check that it matches this base url and append to $relevant_hooks
+          if(strpos($hook['config']['url'], $base_url) !== FALSE){
+            array_push($relevant_hooks, $hook);
+          }
+        }
+      }
 
       foreach($GH_milestones as $GH_milestone) {
         $found = false;
@@ -102,7 +116,7 @@ class SyncController extends Controller {
       return (new Response(['message' => "Error: " . $e->getMessage()], 500));
     }
 
-    return ['syncs' => $syncs];
+    return ['syncs' => $syncs, 'hooks' => $relevant_hooks];
   }
 
   public function createTWMilestone($GH_milestone) {

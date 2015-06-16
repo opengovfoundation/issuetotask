@@ -3,6 +3,7 @@ angular.module('app.controllers')
 
     $scope.$on('GetGithubMilestoneSync', function (event, args) {
       $scope.syncs = args.syncs;
+      $scope.webhook_installed = (args.hooks.length > 0);
     });
 
     $scope.$on('GithubMilestoneSynced', function () {
