@@ -7,7 +7,7 @@
 	"require": {
 		"laravel/framework": "5.0.*",
 		"graham-campbell/github": "~3.2",
-		"rossedman/teamwork": "dev-master#64aa9c9b1903aa40c3dd40f6456d81bcee97534d"
+		"rossedman/teamwork": "dev-master#0df21168f2f9ca4b733ec2e351e825db51d0b0fe"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",
