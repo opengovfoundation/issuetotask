@@ -36,7 +36,11 @@ class SyncController extends Controller {
       if(!$TW_milestone) {
         $milestone = $this->createTWMilestone($GH_milestone);
 
-        return $milestone;
+        $milestoneId = $milestone['milestoneId'];
+
+        $tasklist = $this->createTWTasklist($milestoneId, $GH_milestone);
+
+        return ['milestone' => $milestone, 'tasklist' => $tasklist];
       }
     } catch (\RuntimeException $e) {
       Log::error($e);
@@ -60,19 +64,23 @@ class SyncController extends Controller {
         $found = false;
         $title = $GH_milestone['title'];
         $number = $GH_milestone['number'];
+        $tasklist_sync = ['found' => false, 'attached' => false];
 
         //Check milestone existence by title
         foreach($TW_milestones['milestones'] as $TW_milestone) {
           if($TW_milestone['title'] === $title){
             $found = true;
+
+            $tasklist_sync = $this->tasklistExists($TW_milestone);
           }
         }
 
         array_push($syncs, [
-          'title' => $title, 
-          'milestone_exists' => $found, 
-          'synced' => $found, 
-          'number' => $number
+          'title'             => $title, 
+          'milestone_exists'  => $found, 
+          'synced'            => $found, 
+          'number'            => $number,
+          'tasklist'          => $tasklist_sync
         ]);
       }
 
@@ -98,13 +106,13 @@ class SyncController extends Controller {
       ]);
   }
 
-  public function createTWTasklist($TW_milestone) {
+  public function createTWTasklist($milestoneId, $GH_milestone) {
     return Teamwork::project($this->projectId)->createTasklist([
-        'name'      => $TW_milestone->title,
+        'name'      => $GH_milestone['title'],
         'private'   => false,
         'pinned'    => true,
-        'milestone-id'  => $TW_milestone->id,
-        'description'   => $TW_milestone->description
+        'milestone-id'  => $milestoneId,
+        'description'   => $GH_milestone['description']
       ]);
   }
 
@@ -120,14 +128,23 @@ class SyncController extends Controller {
     return false;
   }
 
-  // public function createTWTasklist($GH_milestone, $TW_milestone) {
-  //   $tasklist = Teamwork::project($this->projectId)->createTasklist({
-  //     'name'          => '',
-  //     'private'       => '',
-  //     'pinned'        => '',
-  //     'milestone-id'  => '',
-  //     'description'   => '',
-  //     ''
-  //   });
-  // }
+  public function tasklistExists($TW_milestone) {
+    $tasklists = Teamwork::project($this->projectId)->tasklists();
+    $found = false;
+    $attached = false;
+
+    foreach($tasklists['tasklists'] as $tasklist) {
+      if($tasklist['name'] === $TW_milestone['title']) {
+        Log::info($tasklist, $TW_milestone);
+        $found = true;
+
+        if($tasklist['milestone-id'] === $TW_milestone['id']) {
+          $attached = true;
+        }
+      }
+    }
+
+    return ['found' => $found, 'attached' => $attached];
+  }
+
 }

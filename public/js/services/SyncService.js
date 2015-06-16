@@ -7,6 +7,7 @@ angular.module('app.services')
 
       return $http.post('/api/sync/milestones', {number: number})
         .success(function (milestone) {
+          console.log(milestone);
           $rootScope.$broadcast('GithubMilestoneSynced');
         })
         .error(function (data) {
