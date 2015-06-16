@@ -7,6 +7,8 @@ use Log;
 
 use GrahamCampbell\GitHub\Facades\GitHub;
 use Rossedman\Teamwork\Facades\Teamwork;
+use Github\ResultPager;
+use Github\Client;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -16,6 +18,7 @@ class SyncController extends Controller {
     $info = explode('/', $_ENV['GH_REPO']);
     $this->org = $info[0];
     $this->repo = $info[1];
+    $this->GH_token = $_ENV['GH_TOKEN'];
 
     $this->projectId = intval($_ENV['TW_PROJECT_ID']);
     $this->personId = intval($_ENV['TW_PERSON_ID']);
@@ -39,6 +42,9 @@ class SyncController extends Controller {
         $milestoneId = $milestone['milestoneId'];
 
         $tasklist = $this->createTWTasklist($milestoneId, $GH_milestone);
+
+        $this->createTasks($GH_milestone['number'], $tasklist['TASKLISTID']);
+        
 
         return ['milestone' => $milestone, 'tasklist' => $tasklist];
       }
@@ -72,15 +78,20 @@ class SyncController extends Controller {
             $found = true;
 
             $tasklist_sync = $this->tasklistExists($TW_milestone);
+
+            $tasks_sync = $this->tasksExist($GH_milestone, $tasklist_sync['id']);
           }
         }
+
+
 
         array_push($syncs, [
           'title'             => $title, 
           'milestone_exists'  => $found, 
           'synced'            => $found, 
           'number'            => $number,
-          'tasklist'          => $tasklist_sync
+          'tasklist'          => $tasklist_sync,
+          'tasks'             => $tasks_sync
         ]);
       }
 
@@ -89,8 +100,6 @@ class SyncController extends Controller {
       //Milestone not found
       return (new Response(['message' => "Error: " . $e->getMessage()], 500));
     }
-
-    //$date = date('Ymd', strtotime($milestone['due_on']));
 
     return ['syncs' => $syncs];
   }
@@ -135,8 +144,8 @@ class SyncController extends Controller {
 
     foreach($tasklists['tasklists'] as $tasklist) {
       if($tasklist['name'] === $TW_milestone['title']) {
-        Log::info($tasklist, $TW_milestone);
         $found = true;
+        $tasklistId = $tasklist['id'];
 
         if($tasklist['milestone-id'] === $TW_milestone['id']) {
           $attached = true;
@@ -144,7 +153,47 @@ class SyncController extends Controller {
       }
     }
 
-    return ['found' => $found, 'attached' => $attached];
+    return ['found' => $found, 'attached' => $attached, 'id' => $tasklistId];
   }
 
+  public function tasksExist($GH_milestone, $tasklistId) {
+    $openIssuesCount = $GH_milestone['open_issues'];
+    $synced = false;
+
+    $tasks = Teamwork::tasklist(intval($tasklistId))->tasks();
+    $taskCount = count($tasks['todo-items']);
+
+    if($openIssuesCount === $taskCount) {
+      $synced = true;
+    }
+
+    return ['count_synced' => $synced];
+  }
+
+  public function createTasks($GH_number, $TW_tasklistId) {
+    $params = [
+      'milestone' => $GH_number,
+    ];
+
+    try {
+      $client = Github::connection('main');
+
+      $paginator = new ResultPager($client);
+
+      $issues = $paginator->fetchAll($client->issues(), 'all', [$this->org, $this->repo, $params]);
+
+      foreach($issues as $issue) {
+        Teamwork::tasklist(intval($TW_tasklistId))->createTask([
+          'content'     => $issue['title'],
+          'notify'      => false,
+          'description' => $issue['body'] . "\n\n***\n" . $issue['html_url'],
+          'tags'        => 'Github Import'
+        ]);
+      }
+    } catch (Exception $e) {
+      return $e;
+    }
+    
+    return $issues;
+  }
 }
