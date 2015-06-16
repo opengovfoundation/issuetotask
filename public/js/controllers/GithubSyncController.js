@@ -1,9 +1,8 @@
 angular.module('app.controllers')
-  .controller('GithubSyncController', function ($scope, $http, $filter, GithubService, TeamworkService, SessionService, SyncService) {
+  .controller('GithubSyncController', function ($scope, $http, $filter, GithubService, TeamworkService, SessionService, SyncService, $timeout) {
 
     $scope.$on('GetGithubMilestoneSync', function (event, args) {
       $scope.syncs = args.syncs;
-      console.log($scope.syncs);
     });
 
     $scope.$on('GithubMilestoneSynced', function () {
@@ -13,7 +12,11 @@ angular.module('app.controllers')
     SyncService.getMilestoneStatuses();
 
     $scope.syncMilestone = function (sync) {
-      SyncService.syncGithubMilestone(sync.number);
+      sync.syncing = true;
+      var promise = SyncService.syncGithubMilestone(sync.number);
+      promise.then(function () {
+        sync.syncing = false;
+      });
     };
 
     $scope.installWebhook = function () {

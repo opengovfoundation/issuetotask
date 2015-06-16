@@ -2,6 +2,8 @@
  *  Custom Styles
  */
 
+ @import 'spinner';
+
 .wrap {
   margin:0 auto;
 }
@@ -17,6 +19,10 @@
 .github-sync-table {
   th, td {
     text-align:center;
+  }
+
+  .spinner {
+    float:right;
   }
 }
 
