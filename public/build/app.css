@@ -5681,32 +5681,95 @@ span.customSelect.changed {
 /*
  *  Custom Styles
  */
-/* line 5, ../sass/style.scss */
+/* line 1, ../sass/_spinner.scss */
+.spinner {
+  width: 50px;
+  height: 30px;
+  font-size: 10px;
+}
+
+/* line 7, ../sass/_spinner.scss */
+.spinner > div {
+  background-color: #333;
+  height: 100%;
+  width: 6px;
+  display: inline-block;
+  -webkit-animation: stretchdelay 1.2s infinite ease-in-out;
+  animation: stretchdelay 1.2s infinite ease-in-out;
+}
+
+/* line 17, ../sass/_spinner.scss */
+.spinner .rect2 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+/* line 22, ../sass/_spinner.scss */
+.spinner .rect3 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+/* line 27, ../sass/_spinner.scss */
+.spinner .rect4 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+/* line 32, ../sass/_spinner.scss */
+.spinner .rect5 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+@-webkit-keyframes stretchdelay {
+  0%, 40%, 100% {
+    -webkit-transform: scaleY(0.4);
+  }
+  20% {
+    -webkit-transform: scaleY(1);
+  }
+}
+@keyframes stretchdelay {
+  0%, 40%, 100% {
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }
+  20% {
+    transform: scaleY(1);
+    -webkit-transform: scaleY(1);
+  }
+}
+/* line 7, ../sass/style.scss */
 .wrap {
   margin: 0 auto;
 }
 
-/* line 9, ../sass/style.scss */
+/* line 11, ../sass/style.scss */
 .glyphicon-ok {
   color: green;
 }
 
-/* line 13, ../sass/style.scss */
+/* line 15, ../sass/style.scss */
 .glyphicon-remove {
   color: red;
 }
 
-/* line 18, ../sass/style.scss */
+/* line 20, ../sass/style.scss */
 .github-sync-table th, .github-sync-table td {
   text-align: center;
 }
+/* line 24, ../sass/style.scss */
+.github-sync-table .spinner {
+  float: right;
+}
 
-/* line 23, ../sass/style.scss */
+/* line 29, ../sass/style.scss */
 .sync-btn {
   cursor: pointer;
   margin-left: 20px;
 }
-/* line 27, ../sass/style.scss */
+/* line 33, ../sass/style.scss */
 .sync-btn:hover {
   font-weight: bold;
 }
