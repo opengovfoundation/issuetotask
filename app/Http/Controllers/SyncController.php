@@ -71,6 +71,7 @@ class SyncController extends Controller {
         $title = $GH_milestone['title'];
         $number = $GH_milestone['number'];
         $tasklist_sync = ['found' => false, 'attached' => false];
+        $tasks_sync = false;
 
         //Check milestone existence by title
         foreach($TW_milestones['milestones'] as $TW_milestone) {
