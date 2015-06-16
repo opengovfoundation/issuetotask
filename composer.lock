@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6966a0bdbc6de0c5379b3d505068cd00",
+    "hash": "544742eefff79cdbf446e695e2599370",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1419,12 +1419,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/rossedman/teamwork.git",
-                "reference": "64aa9c9b1903aa40c3dd40f6456d81bcee97534d"
+                "reference": "0df21168f2f9ca4b733ec2e351e825db51d0b0fe"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/rossedman/teamwork/zipball/4002ead69019aa95836a2f2d37b84a0699fb90d4",
-                "reference": "64aa9c9b1903aa40c3dd40f6456d81bcee97534d",
+                "reference": "0df21168f2f9ca4b733ec2e351e825db51d0b0fe",
                 "shasum": ""
             },
             "require": {
