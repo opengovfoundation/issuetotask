@@ -37,7 +37,7 @@
           <td ng-class="sync.synced ? 'success' : 'danger'">{{ sync.title }}<i class="fa fa-refresh sync-btn" ng-if="!sync.synced" ng-click="syncMilestone(sync)"></i></td>
           <td ng-class="sync.milestone_exists ? 'success' : 'danger'"><i class="fa" ng-class="sync.milestone_exists ? 'fa-check' : 'fa-times-circle'"></i></td>
           <td ng-class="(sync.tasklist.found && sync.tasklist.attached)  ? 'success' : 'danger'"><i class="fa" ng-class="(sync.tasklist.found && sync.tasklist.attached) ? 'fa-check' : 'fa-times-circle'"></i></td>
-          <td ng-class="sync.tasks_synced ? 'success' : 'danger'"><i class="fa" ng-class="sync.tasks_synced ? 'fa-check' : 'fa-times-circle'"></i></td>
+          <td ng-class="sync.tasks.count_synced ? 'success' : 'danger'"><i class="fa" ng-class="sync.tasks.count_synced ? 'fa-check' : 'fa-times-circle'"></i></td>
         </tr>
       </tbody>
     </table>
