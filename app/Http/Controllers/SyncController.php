@@ -34,7 +34,9 @@ class SyncController extends Controller {
       Log::info($TW_milestone);
 
       if(!$TW_milestone) {
-        return $this->createTWMilestone($GH_milestone);
+        $milestone = $this->createTWMilestone($GH_milestone);
+
+        return $milestone;
       }
     } catch (\RuntimeException $e) {
       Log::error($e);
@@ -57,6 +59,7 @@ class SyncController extends Controller {
       foreach($GH_milestones as $GH_milestone) {
         $found = false;
         $title = $GH_milestone['title'];
+        $number = $GH_milestone['number'];
 
         //Check milestone existence by title
         foreach($TW_milestones['milestones'] as $TW_milestone) {
@@ -65,7 +68,12 @@ class SyncController extends Controller {
           }
         }
 
-        array_push($syncs, ['title' => $title, 'milestone_exists' => $found, 'synced' => $found]);
+        array_push($syncs, [
+          'title' => $title, 
+          'milestone_exists' => $found, 
+          'synced' => $found, 
+          'number' => $number
+        ]);
       }
 
       //$milestone = Github::issues()->milestones()->show($this->org, $this->repo, $id);
@@ -87,6 +95,16 @@ class SyncController extends Controller {
         'notify'                => false,
         'reminder'              => false,
         'responsible-party-ids' => $this->personId
+      ]);
+  }
+
+  public function createTWTasklist($TW_milestone) {
+    return Teamwork::project($this->projectId)->createTasklist([
+        'name'      => $TW_milestone->title,
+        'private'   => false,
+        'pinned'    => true,
+        'milestone-id'  => $TW_milestone->id,
+        'description'   => $TW_milestone->description
       ]);
   }
 

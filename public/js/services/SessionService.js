@@ -2,6 +2,7 @@ angular.module('app.services')
   .service('SessionService', function () {
     this.Github = {};
     this.Teamwork = {};
+    this.loading = false;
 
     this.setGithubStatus = function (repo, milestones, hooks) {
       this.Github.repo = repo;

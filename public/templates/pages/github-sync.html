@@ -11,8 +11,9 @@
 <div class="row">
   <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
     <div class="info-box" ng-class="webhook_installed ? 'blue-bg' : 'red-bg'">
-      <i class="fa fa-exclamation-triangle"></i>
+      <i class="fa" ng-class="webhook_installed ? 'fa-check' : 'fa-exclamation-triangle'"></i>
       <div class="title">Webhook{{ webhook_installed ? '' : ' Not'  }} Installed</div>           
+      <button class="btn btn-default" ng-click="installWebhook()">Install Webhook</button>
     </div><!--/.info-box-->     
   </div><!--/.col-->
 </div><!--/.row-->
@@ -34,9 +35,9 @@
       <tbody>
         <tr ng-repeat="sync in syncs | orderBy:'title'">
           <td ng-class="sync.synced ? 'success' : 'danger'">{{ sync.title }}<i class="fa fa-refresh sync-btn" ng-if="!sync.synced" ng-click="syncMilestone(sync)"></i></td>
-          <td ng-class="sync.milestone_synced ? 'success' : 'danger'"><i class="fa" ng-class="sync.milestone_synced ? 'fa-check' : 'fa-times'"></i></td>
-          <td ng-class="sync.tasklist_synced ? 'success' : 'danger'"><i class="fa" ng-class="sync.tasklist_synced ? 'fa-check' : 'fa-times'"></i></td>
-          <td ng-class="sync.tasks_synced ? 'success' : 'danger'"><i class="fa" ng-class="sync.tasks_synced ? 'fa-check' : 'fa-times'"></i></td>
+          <td ng-class="sync.milestone_exists ? 'success' : 'danger'"><i class="fa" ng-class="sync.milestone_synced ? 'fa-check' : 'fa-times-circle'"></i></td>
+          <td ng-class="sync.tasklist_synced ? 'success' : 'danger'"><i class="fa" ng-class="sync.tasklist_synced ? 'fa-check' : 'fa-times-circle'"></i></td>
+          <td ng-class="sync.tasks_synced ? 'success' : 'danger'"><i class="fa" ng-class="sync.tasks_synced ? 'fa-check' : 'fa-times-circle'"></i></td>
         </tr>
       </tbody>
     </table>
