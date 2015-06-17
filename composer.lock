@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d48e5b74aaf760aeaff5af3bafa5d9fc",
+    "hash": "a8a685d0669c5efa4939227afbeb53b7",
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -1419,14 +1419,8 @@
             "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/rossedman/teamwork.git",
-                "reference": "0df21168f2f9ca4b733ec2e351e825db51d0b0fe"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/rossedman/teamwork/zipball/2456d358f8a6b93755243642e3c588d2c36fbc79",
-                "reference": "0df21168f2f9ca4b733ec2e351e825db51d0b0fe",
-                "shasum": ""
+                "url": "https://github.com/cmbirk/teamwork.git",
+                "reference": "606302bf55fe0df1ee68be7adcbc36c943d9d20a"
             },
             "require": {
                 "guzzlehttp/guzzle": "~5.2",
@@ -1445,7 +1439,6 @@
                     "Rossedman\\Teamwork\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1462,7 +1455,7 @@
                 "project management",
                 "teamwork"
             ],
-            "time": "2015-05-25 06:56:36"
+            "time": "2015-06-16 20:25:55"
         },
         {
             "name": "swiftmailer/swiftmailer",

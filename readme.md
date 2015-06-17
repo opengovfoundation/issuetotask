@@ -4,7 +4,7 @@ Connecting and syncing Github's issues with Teamwork's task lists.
 
 ## Warning
 
-This requires the `rossedman/teamwork` library to be edited as shown in [this pull request](https://github.com/rossedman/teamwork/pull/3).
+This is currently using `cmbirk/teamwork` in place of `rossedman/teamwork` while waiting for a pull request.
 
 ## Setup
 
