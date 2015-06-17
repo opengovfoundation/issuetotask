@@ -70,7 +70,7 @@ class GithubController extends Controller {
 			'active'	=> true
 		];
 
-		return Github()->repo()->hooks()->create($this->org, $this->repo, $params);
+		return Github::repo()->hooks()->create($this->org, $this->repo, $params);
 	}
 
 }
