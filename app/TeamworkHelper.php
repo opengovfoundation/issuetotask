@@ -22,6 +22,8 @@ class TeamworkHelper {
   }
 
   public function closeTask(array $task) {
+    return $task;
+
     $task = new Task();
     $task->id = $task['id'];
     return $task->complete();
