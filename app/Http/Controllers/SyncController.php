@@ -25,7 +25,7 @@ class SyncController extends Controller {
   }
 
   public function postGithubWebhook(Request $request) {
-    Log::info($request);
+    return $request;
   }
 
   public function postSyncGithubMilestone(Request $request) {
@@ -37,8 +37,6 @@ class SyncController extends Controller {
       $TW_milestones = Teamwork::project($this->projectId)->milestones();
 
       $TW_milestone = $this->milestoneMatch($GH_milestone, $TW_milestones);
-
-      Log::info($TW_milestone);
 
       if(!$TW_milestone) {
         $milestone = $this->createTWMilestone($GH_milestone);
