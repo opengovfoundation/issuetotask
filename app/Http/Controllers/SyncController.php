@@ -27,7 +27,8 @@ class SyncController extends Controller {
 
   public function postGithubWebhook(Request $request) {
     $action = $request->input('action');
-    $response = [];
+    $issue = $request->input('issue');
+    $response = ['message' => ''];
 
     $helper = new TeamworkHelper();
 
@@ -37,15 +38,15 @@ class SyncController extends Controller {
         //$tasklist = $helper->findTaskListByName();
         break;
       case 'closed'://Issue closed
+        $task = $helper->findTaskByName($issue['title']);
+        return $helper->closeTask($task);
         break;
       case 'reopened'://Issue re-opened
         break;
       case 'created'://Issue commented
         break;
       default:
-
     }
-
 
     return $response;
   }
