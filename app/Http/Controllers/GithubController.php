@@ -56,4 +56,21 @@ class GithubController extends Controller {
 		return ['repo' => $repo, 'milestones' => $milestones, 'hooks' => $relevant_hooks];
 	}
 
+	public function postHooks() {
+		$params = [
+			'name'		=> 'Teamwork Sync',
+			'config'	=> [
+				'url'						=> url() . '/api/sync/github/webhook',
+				'content_type'	=> 'json',
+			],
+			'events'	=> [
+				'issue_comment',
+				'issues'
+			],
+			'active'	=> true
+		];
+
+		return Github()->repo()->hooks()->create($this->org, $this->repo, $params);
+	}
+
 }

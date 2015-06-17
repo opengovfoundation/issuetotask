@@ -24,6 +24,10 @@ class SyncController extends Controller {
     $this->personId = intval($_ENV['TW_PERSON_ID']);
   }
 
+  public function postGithubWebhook(Request $request) {
+    Log::info($request);
+  }
+
   public function postSyncGithubMilestone(Request $request) {
     $number = $request->input('number');
 

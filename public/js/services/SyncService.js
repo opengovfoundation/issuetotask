@@ -19,5 +19,11 @@ angular.module('app.services')
         });
     };
 
+    SyncService.installWebhook = function () {
+      return $http.post('/api/sync/hooks', {}, function (data) {
+        console.log(data);
+      });
+    };
+
     return SyncService;
   });

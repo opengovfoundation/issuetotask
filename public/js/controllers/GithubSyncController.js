@@ -21,6 +21,12 @@ angular.module('app.controllers')
     };
 
     $scope.installWebhook = function () {
-      console.log('installing webhook');
+      $scope.webhook_syncing = true;
+
+      var promise = SyncService.installWebhook();
+
+      promise.then(function () {
+        $scope.webhook_syncing = false;
+      });
     };
   });

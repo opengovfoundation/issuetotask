@@ -25,8 +25,11 @@ Route::get('api/github', 'GithubController@index');
 
 Route::get('api/teamwork', 'TeamworkController@index');
 
+Route::post('api/sync/hooks', 'GithubController@postHooks');
+Route::get('api/sync/hooks', 'GithubController@postHooks');
 Route::post('api/sync/milestones', 'SyncController@postSyncGithubMilestone');
 Route::get('api/sync/milestones', 'SyncController@getGithubMilestoneStatus');
+Route::post('api/sync/github/webhook', 'SyncController@postGithubWebhook');
 
 // Route::controllers([
 // 	'auth' => 'Auth\AuthController',
