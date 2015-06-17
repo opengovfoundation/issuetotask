@@ -58,7 +58,7 @@ class GithubController extends Controller {
 
 	public function postHooks() {
 		$params = [
-			'name'		=> 'Teamwork Sync',
+			'name'		=> 'web',
 			'config'	=> [
 				'url'						=> url() . '/api/sync/github/webhook',
 				'content_type'	=> 'json',
