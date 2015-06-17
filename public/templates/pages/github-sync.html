@@ -13,7 +13,7 @@
     <div class="info-box" ng-class="webhook_installed ? 'blue-bg' : 'red-bg'">
       <i class="fa" ng-class="webhook_installed ? 'fa-check' : 'fa-exclamation-triangle'"></i>
       <div class="title">Webhook{{ webhook_installed ? '' : ' Not'  }} Installed</div>           
-      <button class="btn btn-default" ng-click="installWebhook()">Install Webhook</button>
+      <button class="btn btn-default" ng-if="!webhook_installed" ng-click="installWebhook()">Install Webhook</button>
     </div><!--/.info-box-->     
   </div><!--/.col-->
 </div><!--/.row-->
