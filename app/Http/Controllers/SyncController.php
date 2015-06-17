@@ -2,6 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\TeamworkHelper;
 
 use Log;
 
@@ -25,7 +26,28 @@ class SyncController extends Controller {
   }
 
   public function postGithubWebhook(Request $request) {
-    return $request;
+    $action = $request->input('action');
+    $response = [];
+
+    $helper = new TeamworkHelper();
+
+    switch($action) {
+      case 'opened'://Issue created
+        //Grab tasklist based on milestone
+        //$tasklist = $helper->findTaskListByName();
+        break;
+      case 'closed'://Issue closed
+        break;
+      case 'reopened'://Issue re-opened
+        break;
+      case 'created'://Issue commented
+        break;
+      default:
+
+    }
+
+
+    return $response;
   }
 
   public function postSyncGithubMilestone(Request $request) {
