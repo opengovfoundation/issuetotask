@@ -34,7 +34,7 @@
       </thead>
       <tbody>
         <tr ng-repeat="sync in syncs | orderBy:'title'">
-          <td ng-class="sync.synced ? 'success' : 'danger'">
+          <td ng-class="{'danger': sync.synced === -1, 'warning': sync.synced === 0, 'success': sync.synced === 1}">
             {{ sync.title }}
             <i class="fa fa-refresh sync-btn" ng-if="!sync.synced" ng-click="syncMilestone(sync)"></i>
             <div class="spinner" ng-if="sync.syncing">

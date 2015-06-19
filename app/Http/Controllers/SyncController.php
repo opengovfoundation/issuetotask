@@ -111,6 +111,7 @@ class SyncController extends Controller {
         $number = $GH_milestone['number'];
         $tasklist_sync = ['found' => false, 'attached' => false];
         $tasks_sync = false;
+        $syned = -1;
 
         //Check milestone existence by title
         foreach($TW_milestones['milestones'] as $TW_milestone) {
@@ -123,12 +124,18 @@ class SyncController extends Controller {
           }
         }
 
-
+        if($found || $tasklist_sync['synced'] || $tasks_sync['count_synced']) {
+          if($found && $tasklist_sync['synced'] && $tasks_sync['count_synced']) {
+            $synced = 1;
+          } else {
+            $synced = 0;
+          }
+        }
 
         array_push($syncs, [
           'title'             => $title, 
           'milestone_exists'  => $found, 
-          'synced'            => $found, 
+          'synced'            => $synced, 
           'number'            => $number,
           'tasklist'          => $tasklist_sync,
           'tasks'             => $tasks_sync
@@ -193,7 +200,7 @@ class SyncController extends Controller {
       }
     }
 
-    return ['found' => $found, 'attached' => $attached, 'id' => $tasklistId];
+    return ['found' => $found, 'attached' => $attached, 'id' => $tasklistId, 'synced' => ($found && $attached)];
   }
 
   public function tasksExist($GH_milestone, $tasklistId) {
