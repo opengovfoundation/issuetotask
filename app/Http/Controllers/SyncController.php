@@ -56,7 +56,6 @@ class SyncController extends Controller {
 
     try {
       $GH_milestone = Github::issues()->milestones()->show($this->org, $this->repo, $number);  
-      
       $TW_milestones = Teamwork::project($this->projectId)->milestones();
 
       $TW_milestone = $this->milestoneMatch($GH_milestone, $TW_milestones);
@@ -70,8 +69,26 @@ class SyncController extends Controller {
 
         $this->createTasks($GH_milestone['number'], $tasklist['TASKLISTID']);
         
-
         return ['milestone' => $milestone, 'tasklist' => $tasklist];
+      } else {
+        $TW_milestone_id = $TW_milestone['id'];
+
+        $tasklists = Teamwork::project(intval($this->projectId))->tasklists();
+
+        $found = false;
+
+        //Find attached tasklist and delete it
+        foreach($tasklists['tasklists'] as $tasklist) {
+          if(intval($tasklist['milestone-id']) === intval($TW_milestone_id)) {
+            Teamwork::tasklist(intval($tasklist['id']))->delete();
+          }
+        }
+
+        //Recreate tasklist and tasks
+        $tasklist = $this->createTWTasklist($TW_milestone_id, $GH_milestone);
+        $this->createTasks($GH_milestone['number'], $tasklist['TASKLISTID']);
+
+        return ['milestone' => $TW_milestone, 'tasklist' => $tasklist];
       }
     } catch (\RuntimeException $e) {
       Log::error($e);
@@ -188,6 +205,7 @@ class SyncController extends Controller {
     $tasklists = Teamwork::project($this->projectId)->tasklists();
     $found = false;
     $attached = false;
+    $tasklistId = null;
 
     foreach($tasklists['tasklists'] as $tasklist) {
       if($tasklist['name'] === $TW_milestone['title']) {
